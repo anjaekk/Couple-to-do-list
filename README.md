@@ -1,91 +1,61 @@
-# liveconnect-backend-assignment-anjaekk
+# liveconnect-backend-assignment
+
+<br/> 
+<br/> 
+
+## 사용 스펙 
+Python, Django를 추천하며 다른 언어 및 프레임워크도 사용가능
+
+<br/> 
+<br/> 
+
+## 과제 배경  
+새로운 서비스 개발 프로젝트에 참여하는 상황을 가정하여, user app을 맡아 개발하시면 됩니다.    
+서비스 분야와 무관하게 공통적으로 필요하다고 판단하는 field들로 user(회원)테이블을 설계하고, 
+아래의 user 관련 api들을 설계, 구현합니다. 
+
+ 
+<br/> 
+<br/> 
+
+## 개발할 API
+Rest api로 설계하며, response는 json 데이터로 전달합니다.
+| 항목(API 수) | 상세 API 리스트 |
+| ------ | ------ |
+| 유저(4개) | 회원가입/로그인/로그아웃/마이페이지(본인정보) 조회 |
+| 유저관리(1개) | 전체 유저리스트 조회 |
+| 팔로우기능(1개) | 특정 유저를 팔로우 |
+
+<br/> 
+<br/> 
+
+## 비즈니스 로직 및 기능
+#### 기본 기능
+- 마이페이지 조회 api는 로그인한 본인의 정보를 조회한다. 
+- 전체 유저리스트 조회는 관리자만 가능하다. 
+#### 팔로우 기능
+팔로우(Follow)는 블로그나 뉴스 등을 구독하듯이 누군가가 올린 글을 계속해서 확인하고자 할 때 사용합니다.<br>
+팔로잉(Following)은 내가 누군가를 팔로우한 것입니다. 나의 팔로잉이 10명이라면, 내가 팔로우한 유저가 10명 있다는 뜻입니다.<br>
+팔로워(Follower)는 나를 팔로우하는 유저입니다. 나의 팔로워가 10명이라면, 나를 팔로우하는 유저가 10명 있다는 뜻입니다.
+- User와 User간의 팔로우 기능을 구현합니다.
+- User의 마이페이지에서 팔로잉, 팔로워 리스트를 조회합니다.
+
+<br/> 
+<br/> 
+
+## 제출 사항
+- 과제 진행 내역 및 코드를 본 repository의 새로운 branch에 Commit & Push.
+- API 명세
+- 서버 실행 가이드
 
 
+### API 명세
+- 개발 완료된 API 관련 정보가 기술된 명세 및 조회 방법을 기재해주세요.
+- 양식 제한은 없으며, 문서, Swagger URL 또는 README.md 파일을 이용하셔도 됩니다.
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/liveconnect-dev/liveconnect-backend-assignment-anjaekk.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/integrations/)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Automatically merge when pipeline succeeds](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://docs.gitlab.com/ee/user/clusters/agent/)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://gitlab.com/-/experiment/new_project_readme_content:db896fbac079da669d01077f56ea1d0a?https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
+### 서버 실행 가이드
+- 진행하신 사전 과제를 확인할 수 있도록, 어플리케이션 실행 가이드를 순차적, 구체적으로 기재해주세요.
+  - command 레벨로 구체적인 가이드 명시. 
+  - 예) `docker-compose start`
+  - 예) `python manage.py runserver`
