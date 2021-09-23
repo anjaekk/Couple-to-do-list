@@ -3,10 +3,13 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 from core.models import TimestampedModel
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, phone_number, name, nickname, password=None, **extra_fields):
         if not email:
             raise ValueError("must have user email")
+        if not phone_number:
+            raise ValueError("must have user phone_number")
         if not name:
             raise ValueError("must have user name")
         if not nickname:
@@ -18,10 +21,6 @@ class UserManager(BaseUserManager):
             name = name,
             nickname = nickname
         )
-
-        user.set_password(password)
-        user.save(using=self._db)
-
         return user
     
     def create_superuser(self, email, phone_number, name, nickname, password=None, **extra_fields):
@@ -50,9 +49,7 @@ class User(AbstractBaseUser, TimestampedModel):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["nickname", "name"]
+    REQUIRED_FIELDS = ["nickname", "phone_number", "name"]
 
     def __str__(self):
         return self.nickname
-
-
