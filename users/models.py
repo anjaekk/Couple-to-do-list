@@ -1,6 +1,7 @@
-from os import name
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+
+from core.models import TimestampedModel
 
 class UserManager(BaseUserManager):
     def create_user(self, email, phone_number, name, nickname, password=None, **extra_fields):
@@ -36,7 +37,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, phone_number, name, nickname, password, **extra_fields)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, TimestampedModel):
     email = models.EmailField(max_length=254, unique=True)
     phone_number = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -48,8 +49,8 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = "nickname"
-    REQUIRED_FIELDS = ["email", "nickname", "name"]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["nickname", "name"]
 
     def __str__(self):
         return self.nickname
