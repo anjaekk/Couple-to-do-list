@@ -29,8 +29,16 @@ class UserSignupSerializer(serializers.ModelSerializer):
         fields = "__all__"
         extra_kwargs = {"password": {"write_only":True}}
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
         fields = ["email", "password"]
+
+
+class UserListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        exclude = ["password"]
