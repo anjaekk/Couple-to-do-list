@@ -2,11 +2,12 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import generics
 from rest_framework import views
+from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializers import UserSignupSerializer, UserListSerializer
+from .serializers import UserSignupSerializer, UserListSerializer, UserDetailSerializer
 from .models import Follow
 
 User = get_user_model()
@@ -44,3 +45,7 @@ class FollowView(views.APIView):
             following_id = user_id
         )
         return Response({"message":"SUCCESS"}, status = status.HTTP_201_CREATED)
+
+class UserDetailView(viewsets.ModelViewSet):
+    serializer_class = UserDetailSerializer
+    queryset = User.objects.all()

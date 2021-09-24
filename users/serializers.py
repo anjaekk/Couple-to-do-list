@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 from rest_framework import serializers
 
-from .models import User
+from .models import Follow, User
 
 User = get_user_model()
 
@@ -42,3 +42,23 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ["password"]
+
+
+class FollowSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Follow
+        fields = "__all__"
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    follow_count = serializers.SerializerMethodField(method_name="get_follow_count")
+
+    def get_follow_count(self, obj):
+        follower_count = obj.follower.count()
+        following_count = obj.following.count()
+        return {"follower_count":follower_count, "following_count":following_count}
+
+    class Meta:
+        model = User
+        fields = ["email", "phone_number", "name", "nickname", "follow_count"]
