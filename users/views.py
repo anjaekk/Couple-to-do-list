@@ -6,8 +6,9 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UserSignupSerializer, UserListSerializer, UserDetailSerializer, FollowListSerializer, FollowUserSerializer
+from .serializers import UserSignupSerializer, UserLoginSerializer, UserLogoutSerializer, UserListSerializer, UserDetailSerializer, FollowListSerializer
 from .models import Follow
 
 User = get_user_model()
@@ -22,6 +23,32 @@ class SignUpView(generics.CreateAPIView):
         serializer.is_valid(raise_exception = True)
         serializer.save()
         return Response({"message":"SUCCESS"}, status = status.HTTP_201_CREATED)
+
+
+class UserLoginView(views.APIView):
+    serializer_class = UserLoginSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = {
+            "message":"SUCCESS",
+            "user":serializer.data["email"],
+            "access": serializer.data["access"],
+            "refresh": serializer.data["refresh"],
+        }
+        return Response(response, status = status.HTTP_200_OK)
+
+
+class UserLogoutView(views.APIView):
+    serializer_class = UserLogoutSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"message":"SUCCESS"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class UserListView(generics.ListAPIView):
