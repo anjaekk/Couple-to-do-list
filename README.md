@@ -3,59 +3,71 @@
 <br/> 
 <br/> 
 
-## 사용 스펙 
-Python, Django를 추천하며 다른 언어 및 프레임워크도 사용가능
+## 기술 스택
+Python, Django(Django-REST-framework), MySQL
 
 <br/> 
 <br/> 
 
-## 과제 배경  
-새로운 서비스 개발 프로젝트에 참여하는 상황을 가정하여, user app을 맡아 개발하시면 됩니다.    
-서비스 분야와 무관하게 공통적으로 필요하다고 판단하는 field들로 user(회원)테이블을 설계하고, 
-아래의 user 관련 api들을 설계, 구현합니다. 
-
- 
-<br/> 
-<br/> 
-
-## 개발할 API
-Rest api로 설계하며, response는 json 데이터로 전달합니다.
-| 항목(API 수) | 상세 API 리스트 |
-| ------ | ------ |
-| 유저(4개) | 회원가입/로그인/로그아웃/마이페이지(본인정보) 조회 |
-| 유저관리(1개) | 전체 유저리스트 조회 |
-| 팔로우기능(1개) | 특정 유저를 팔로우 |
+## 추가 구현 기능
+- 회원가입시 비밀번호 유효성 검사
+- 리스트 조회시 Pagination
+- 기존에 팔로우 한사람을 재팔로우시 팔로우가 취소되도록 구현
+- 마이페이지에선 팔로우와 팔로잉 수 확인 가능하고 팔로우와 팔로잉 엔드포인트를 따로 두어 확인하도록 구현
 
 <br/> 
 <br/> 
 
-## 비즈니스 로직 및 기능
-#### 기본 기능
-- 마이페이지 조회 api는 로그인한 본인의 정보를 조회한다. 
-- 전체 유저리스트 조회는 관리자만 가능하다. 
-#### 팔로우 기능
-팔로우(Follow)는 블로그나 뉴스 등을 구독하듯이 누군가가 올린 글을 계속해서 확인하고자 할 때 사용합니다.<br>
-팔로잉(Following)은 내가 누군가를 팔로우한 것입니다. 나의 팔로잉이 10명이라면, 내가 팔로우한 유저가 10명 있다는 뜻입니다.<br>
-팔로워(Follower)는 나를 팔로우하는 유저입니다. 나의 팔로워가 10명이라면, 나를 팔로우하는 유저가 10명 있다는 뜻입니다.
-- User와 User간의 팔로우 기능을 구현합니다.
-- User의 마이페이지에서 팔로잉, 팔로워 리스트를 조회합니다.
+## API 명세
+### API 명세 링크(Postman)
+🔗 [API 명세 바로가기](https://documenter.getpostman.com/view/16450829/UUxxgUAt
+)
+
+### 구현한 API 리스트
+
+
+|HTTP method|URI|Description|
+|:-:|:-:|:-:|
+|POST|/users/signup|회원가입|
+|POST|/users/login|로그인|
+|POST|/users/logout|로그아웃|
+|GET|/users|전체 유저 리스트 조회|
+|POST|/users/{user_id}/follow|특정 유저 팔로우|
+|GET|/users/{user_id}|마이페이지 조회|
+|GET|/users/{user_id}/follower|특정 유저 팔로우 리스트 조회|
+|GET|/users/{user_id}/following|특정 유저 팔로잉 리스트 조회|
 
 <br/> 
 <br/> 
 
-## 제출 사항
-- 과제 진행 내역 및 코드를 본 repository의 새로운 branch에 Commit & Push.
-- API 명세
-- 서버 실행 가이드
+## 서버 실행 가이드
 
+**1. 모듈설치**
+```
+pip install -r requirements.txt
+```
+**2. MySQL 비밀번호를 사용하시는 비밀번호로 변경**
+api_settings.py 에서 MySQL 비밀번호를 사용하시는 비밀번호로 변경
 
-### API 명세
-- 개발 완료된 API 관련 정보가 기술된 명세 및 조회 방법을 기재해주세요.
-- 양식 제한은 없으며, 문서, Swagger URL 또는 README.md 파일을 이용하셔도 됩니다.
+**3. DB 생성**
+```
+$ mysql -u root -p
 
+mysql> create database liveconnect character set utf8mb4 collate utf8mb4_general_ci;
+```
 
-### 서버 실행 가이드
-- 진행하신 사전 과제를 확인할 수 있도록, 어플리케이션 실행 가이드를 순차적, 구체적으로 기재해주세요.
-  - command 레벨로 구체적인 가이드 명시. 
-  - 예) `docker-compose start`
-  - 예) `python manage.py runserver`
+**4. 마이그레이션**
+```
+python manage.py makemigrations
+```
+
+**5. 마이그레이트**
+```
+python manage.py migrate
+```
+
+**6. 프로젝트 로컬 서버에 실행**
+```
+$ manage.py가 있는 api 폴더
+python manage.py runserver
+```
