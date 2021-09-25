@@ -1,4 +1,5 @@
 # liveconnect-backend-assignment
+API 명세에서 각 API별 case별 return 내역을 확인하실 수 있습니다. 
 
 <br/> 
 <br/> 
@@ -14,14 +15,14 @@ Python, Django(Django-REST-framework), MySQL
 - 리스트 조회시 Pagination
 - 기존에 팔로우 한사람을 재팔로우시 팔로우가 취소되도록 구현
 - 마이페이지에선 팔로우와 팔로잉 수 확인 가능하고 팔로우와 팔로잉 엔드포인트를 따로 두어 확인하도록 구현
+- Timestamp(created_at, updated_at) table을 추상화하고 User table에서 상속받도록 구현 
 
 <br/> 
 <br/> 
 
 ## API 명세
 ### API 명세 링크(Postman)
-🔗 [API 명세 바로가기](https://documenter.getpostman.com/view/16450829/UUxxgUAt
-)
+🔗 [API 명세 바로가기](https://documenter.getpostman.com/view/16450829/UUxxgUAt)
 
 ### 구현한 API 리스트
 
