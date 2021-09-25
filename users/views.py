@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializers import UserSignupSerializer, UserListSerializer, UserDetailSerializer
+from .serializers import UserSignupSerializer, UserListSerializer, UserDetailSerializer, FollowListSerializer, FollowUserSerializer
 from .models import Follow
 
 User = get_user_model()
@@ -46,6 +46,25 @@ class FollowView(views.APIView):
         )
         return Response({"message":"SUCCESS"}, status = status.HTTP_201_CREATED)
 
+
 class UserDetailView(viewsets.ModelViewSet):
     serializer_class = UserDetailSerializer
     queryset = User.objects.all()
+
+
+class FollowerLisetView(generics.ListAPIView):   # 해당 사용자를 팔로우한 목록
+    serializer_class = FollowListSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs["user_id"]
+        queryset = User.objects.filter(following__following_id=user_id)
+        return queryset
+
+
+class FollowingLisetView(generics.ListAPIView):   # 해당 사용자가 팔로우한 목록
+    serializer_class = FollowListSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs["user_id"]
+        queryset = User.objects.filter(follower__follower_id=user_id)
+        return queryset
