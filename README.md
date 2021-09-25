@@ -13,6 +13,7 @@ Python, Django(Django-REST-framework), MySQL
 ## 추가 구현 기능
 - 회원가입시 비밀번호 유효성 검사
 - 리스트 조회시 Pagination
+- 비밀번호 set_password()를 이용하여 해싱 저장
 - 기존에 팔로우 한사람을 재팔로우시 팔로우가 취소되도록 구현
 - 마이페이지에선 팔로우와 팔로잉 수 확인 가능하고 팔로우와 팔로잉 엔드포인트를 따로 두어 확인하도록 구현
 - Timestamp(created_at, updated_at) table을 추상화하고 User table에서 상속받도록 구현 
