@@ -1,4 +1,4 @@
-# liveconnect-backend-assignment
+# drf practice
 API 명세에서 각 API별 case별 return 내역을 확인하실 수 있습니다. 
 
 <br/> 
@@ -10,7 +10,7 @@ Python, Django(Django-REST-framework), MySQL
 <br/> 
 <br/> 
 
-## 추가 구현 기능
+## 현 기능
 - 회원가입시 비밀번호 유효성 검사
 - 리스트 조회시 Pagination
 - 비밀번호 set_password()를 이용하여 해싱 저장
