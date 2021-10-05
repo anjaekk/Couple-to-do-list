@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  api:
+    image: api
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_DB_HOST=db
+    volumes:
+      - ./:/app/
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    container_name: couple
+    volumes: 
+      - ./couple-data:/usr/local/var/mysql
+    environment:
+      MYSQL_DATABASE: couple
+      MYSQL_ROOT_USER: root
+      MYSQL_PASSWORD: "12345"
+      MYSQL_ROOT_PASSWORD: "12345"
+    ports:
+      - 3306:3306
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  couple-data:
