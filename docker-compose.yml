@@ -21,7 +21,7 @@ services:
     image: mysql
     container_name: couple
     volumes: 
-      - ./couple-data:/usr/local/var/mysql
+      - /usr/local/var/mysql/couple:/var/lib/mysql
     environment:
       MYSQL_DATABASE: couple
       MYSQL_ROOT_USER: root

@@ -1,11 +1,10 @@
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'liveconnect',
+        'NAME': 'couple',
         'USER': 'root',
         'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '3306',
     }
 }
-

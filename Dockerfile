@@ -13,7 +13,6 @@ COPY   requirements.txt .
 RUN    pip install -r requirements.txt
 
 ADD    ./api   /app/api/
-ADD    ./gunicorn       /app/gunicorn/
 ADD    ./manage.py      /app/
 
 CMD ["gunicorn", "--bind", "0:8000", "api.wsgi"]
