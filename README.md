@@ -1,5 +1,5 @@
-# drf practice
-API 명세에서 각 API별 case별 return 내역을 확인하실 수 있습니다. 
+# Couple to do list
+최종 목표는 Couple to do list를 만드는 것이나 공부해보고 싶은 기능들을 이것, 저것 구현하면서 하다보니 언제 완성될지는 미정입니다!
 
 <br/> 
 <br/> 
@@ -41,35 +41,3 @@ Python, Django(Django-REST-framework), MySQL
 
 <br/> 
 <br/> 
-
-## 서버 실행 가이드
-
-**1. 모듈설치**
-```
-pip install -r requirements.txt
-```
-**2. MySQL 비밀번호를 사용하시는 비밀번호로 변경**
-api_settings.py 에서 MySQL 비밀번호를 사용하시는 비밀번호로 변경
-
-**3. DB 생성**
-```
-$ mysql -u root -p
-
-mysql> create database liveconnect character set utf8mb4 collate utf8mb4_general_ci;
-```
-
-**4. 마이그레이션**
-```
-python manage.py makemigrations
-```
-
-**5. 마이그레이트**
-```
-python manage.py migrate
-```
-
-**6. 프로젝트 로컬 서버에 실행**
-```
-$ manage.py가 있는 api 폴더
-python manage.py runserver
-```
