@@ -16,6 +16,8 @@ services:
       - DJANGO_DB_HOST=db
     volumes:
       - ./:/app/
+    networks:
+      - couple-backend
     depends_on:
       - db
 
@@ -23,7 +25,7 @@ services:
     image: mysql:5.7
     container_name: couple
     volumes: 
-      - couple:/var/lib/mysql
+      - couple-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: couple
       MYSQL_ROOT_USER: root
@@ -34,6 +36,34 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+    networks:
+      - couple-backend
+
+  redis:
+    image: redis:5.0-alpine
+    ports: 
+      - 6379:6379
+    restart: unless-stopped
+    volumes: 
+      - couple-redis:/data
+  
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+    restart: unless-stopped
+    depends_on:
+      - redis
+    volumes:
+      - couple:/app/ # shared volume between worker and api for media
+    networks:
+      - couple-backend
 
 volumes:
   couple:
+  couple-data:
+  couple-redis:
+
+networks:
+  couple-backend:
+    driver: bridge

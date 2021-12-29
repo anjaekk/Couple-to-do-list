@@ -7,12 +7,19 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    default-libmysqlclient-dev \
+    tzdata \
+    locales
+
+ENV TZ=Asia/Seoul
 
 COPY   requirements.txt .
 RUN    pip install -r requirements.txt
 
-ADD    ./api   /app/api/
-ADD    ./manage.py      /app/
+WORKDIR /app
+COPY . /app
 
 CMD ["gunicorn", "--bind", "0:8000", "api.wsgi"]

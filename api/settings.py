@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_celery_results',
 
     'users',
     'core',
@@ -149,6 +150,26 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+# CELERY SETTINGS
+CELERY_TIMEZONE = 'Asia/Seoul'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_TASK_ALWAYS_EAGER = not CELERY_BROKER_URL # If this is True, all tasks will be executed locally by blocking until the task returns
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+# django setting.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'redis://localhost:6379',
+    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
