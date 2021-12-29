@@ -17,20 +17,20 @@ services:
       - db
 
   db:
-    image: mysql
+    image: mysql:5.7
     container_name: couple
     volumes: 
-      - /usr/local/var/mysql/couple:/var/lib/mysql
+      - couple:/var/lib/mysql
     environment:
       MYSQL_DATABASE: couple
       MYSQL_ROOT_USER: root
       MYSQL_PASSWORD: "12345"
       MYSQL_ROOT_PASSWORD: "12345"
     ports:
-      - 3306:3306
+      - 3307:3306
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
 volumes:
-  couple-data:
+  couple:

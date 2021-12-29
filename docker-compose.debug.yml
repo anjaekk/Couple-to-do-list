@@ -8,9 +8,9 @@ services:
       context: .
       dockerfile: Dockerfile.debug
     ports:
-      - "8000:8000"
-      - "5678:5678"
-        command: sh -c "python manage.py makemigrations && pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000"
+      - 8000:8000
+      - 5678:5678
+    command: sh -c "python manage.py makemigrations && pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000"
     environment:
       - DJANGO_DEBUG=True
       - DJANGO_DB_HOST=db
@@ -20,20 +20,20 @@ services:
       - db
 
   db:
-    image: mysql
+    image: mysql:5.7
     container_name: couple
     volumes: 
-      - /usr/local/var/mysql/couple:/var/lib/mysql
+      - couple:/var/lib/mysql
     environment:
       MYSQL_DATABASE: couple
       MYSQL_ROOT_USER: root
       MYSQL_PASSWORD: "12345"
       MYSQL_ROOT_PASSWORD: "12345"
     ports:
-      - 3306:3306
+      - 3307:3306
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
 volumes:
-  couple-data:
+  couple:

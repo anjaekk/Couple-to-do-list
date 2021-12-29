@@ -1,6 +1,5 @@
 from pathlib import Path
 import datetime
-import api_settings
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,7 +75,17 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = api_settings.DATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'couple',
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '8000',
+        'OPTIONS': {'charset': 'utf8mb4'}
+    }
+}
 
 
 # Password validation
