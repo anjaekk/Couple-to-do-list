@@ -1,6 +1,6 @@
 from pathlib import Path
 import datetime
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'django_celery_results',
+    'django_redis',
 
     'users',
     'core',
@@ -82,8 +83,8 @@ DATABASES = {
         'NAME': 'couple',
         'USER': 'root',
         'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'PORT': '8000',
+        'HOST': 'db',
+        'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
@@ -153,21 +154,19 @@ CORS_ALLOW_HEADERS = (
 
 # CELERY SETTINGS
 CELERY_TIMEZONE = 'Asia/Seoul'
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_TASK_ALWAYS_EAGER = not CELERY_BROKER_URL # If this is True, all tasks will be executed locally by blocking until the task returns
+CELERY_BROKER_URL = 'redis://redis_server:6379/1'
+CELERY_RESULT_BACKEND = 'redis://redis_server:6379/1'
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
-# celery setting.
-CELERY_CACHE_BACKEND = 'default'
-
-# django setting.
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'redis://localhost:6379',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis_server:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 
