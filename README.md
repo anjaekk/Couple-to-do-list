@@ -5,7 +5,8 @@
 <br/> 
 
 ## 기술 스택
-Python, Django(Django-REST-framework), MySQL
+Python, Django(Django-REST-framework), MySQL     
+Docker compose
 
 <br/> 
 <br/> 
