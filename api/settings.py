@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'users',
     'core',
+    'boards',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,8 @@ DATABASES = {
         'NAME': 'couple',
         'USER': 'root',
         'PASSWORD': '12345',
-        'HOST': 'db',
+        # 'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'}
     }

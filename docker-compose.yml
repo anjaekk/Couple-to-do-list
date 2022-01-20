@@ -10,17 +10,21 @@ services:
     ports:
       - 8000:8000
     environment:
+      - DJANGO_DEBUG=True
       - DJANGO_DB_HOST=db
     volumes:
       - ./:/app/
+    links:
+      - redis
     depends_on:
       - db
+      - redis
 
   db:
     image: mysql:5.7
-    container_name: couple
+    container_name: couple-data
     volumes: 
-      - couple:/var/lib/mysql
+      - couple-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: couple
       MYSQL_ROOT_USER: root
@@ -32,5 +36,27 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
+  redis:
+    image: redis:5.0-alpine
+    container_name: redis_server
+    ports: 
+      - 6379:6379
+    restart: unless-stopped
+    volumes: 
+      - couple-redis:/data
+  
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: celery -A api worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - ./:/app/ 
+
 volumes:
   couple:
+  couple-data:
+  couple-redis:
