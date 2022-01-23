@@ -6,7 +6,7 @@
 
 ## 기술 스택
 Python, Django(Django-REST-framework), MySQL     
-Docker compose
+Docker-compose
 
 <br/> 
 <br/> 
@@ -29,16 +29,17 @@ Docker compose
 ### 구현한 API 리스트
 
 
-|HTTP method|URI|Description|
-|:-:|:-:|:-:|
-|POST|/users/signup|회원가입|
-|POST|/users/login|로그인|
-|POST|/users/logout|로그아웃|
-|GET|/users|전체 유저 리스트 조회|
-|POST|/users/{user_id}/follow|특정 유저 팔로우|
-|GET|/users/{user_id}|마이페이지 조회|
-|GET|/users/{user_id}/follower|특정 유저 팔로우 리스트 조회|
-|GET|/users/{user_id}/following|특정 유저 팔로잉 리스트 조회|
+|HTTP method|Division|URI|Description|
+|:-:|:-:|:-:|:-:|
+|POST|users|/users/signup|회원가입|
+|POST||/users/login|로그인|
+|POST||/users/logout|로그아웃|
+|GET||/users|전체 유저 리스트 조회|
+|POST||/users/{user_id}/follow|특정 유저 팔로우|
+|GET||/users/{user_id}|마이페이지 조회|
+|GET||/users/{user_id}/follower|특정 유저 팔로우 리스트 조회|
+|GET||/users/{user_id}/following|특정 유저 팔로잉 리스트 조회|
+|POST|boards|/boards/task|일정 추가|
 
 <br/> 
 <br/> 
