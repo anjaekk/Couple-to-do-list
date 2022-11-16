@@ -1,5 +1,5 @@
-# Couple to do list
-최종 목표는 Couple to do list를 만드는 것이나 공부해보고 싶은 기능들을 이것, 저것 구현하면서 하다보니 언제 완성될지는 미정입니다!
+# DjangoRestFramework-Playground
+공부해보고 싶은 기능들을 이것, 저것 구현하면서 하다보니 언제 완성될지는 미정입니다!
 
 <br/> 
 <br/> 
